@@ -48,6 +48,7 @@ def main(task_for):
             "try": all_tests,
             "try-taskcluster": [
                 # Add functions here as needed, in your push to that branch
+                windows_nightly
             ],
             "master": [
                 upload_docs,
@@ -397,8 +398,8 @@ def windows_nightly():
         windows_build_task("Nightly build and upload")
         .with_treeherder("Windows x64", "Nightly")
         .with_scopes("secrets:get:project/servo/s3-upload-credentials")
-        .with_script("mach build --release",
-                     "mach package --release",
+        .with_script(#"mach build --release",
+                     #"mach package --release",
                      "mach upload-nightly windows-msvc --secret-from-taskcluster")
         .with_artifacts("repo/target/release/msi/Servo.exe",
                         "repo/target/release/msi/Servo.zip")

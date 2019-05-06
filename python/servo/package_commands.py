@@ -544,6 +544,7 @@ class PackageCommands(CommandBase):
                      help='Retrieve the appropriate secrets from taskcluster.')
     def upload_nightly(self, platform, secret_from_taskcluster):
         import boto3
+        get_s3_secret()
 
         def get_taskcluster_secret(name):
             url = (
